@@ -7,8 +7,10 @@ $(() => {
   const $random = $('#js-random');
   const $output = $('#js-output pre');
 
-  let currentCat = 'sorting';
-  let currentAlgo = 'bubble';
+  let [
+    currentCat = 'sorting',
+    currentAlgo = 'bubble'
+  ] = window.location.hash.split('/').slice(1);
 
   // load algorithms
   $.each(categories, (_, cat) => {

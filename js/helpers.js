@@ -3,7 +3,7 @@ const typeToId = (type) => `js-editor-${type}`;
 const grabById = (id) => $(`#${id}`);
 const randomInt = () => Math.floor(1 + Math.random() * 9);
 const randomInRange = (min, max) => Math.floor(min + Math.random() * max);
-const randomArray = () => [...new Array(randomInRange(5, 20))].map(randomInt);
+const randomArray = () => [...new Array(randomInRange(5, 15))].map(randomInt);
 
 function idToTheme(id) {
   return (id.replace('js-editor-', '') === 'code') ? 'solarized_light' : 'tomorrow_night';
@@ -52,8 +52,10 @@ function createAlgorithmSelectOption(cat, algo) {
 }
 
 function loadAlgorithm(cat, algo) {
-  $.get(`./${cat}/${algo}.js`, (res) => {
+  const path = `/${cat}/${algo}`;
+  $.get(`.${path}.js`, (res) => {
     window.codeEditor.editor.setValue(res);
+    window.location.hash = path;
   });
 }
 
