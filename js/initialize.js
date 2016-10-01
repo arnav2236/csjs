@@ -7,10 +7,7 @@ $(() => {
   const $random = $('#js-random');
   const $output = $('#js-output pre');
 
-  let [
-    currentCat = 'sorting',
-    currentAlgo = 'bubble'
-  ] = window.location.hash.split('/').slice(1);
+  const [currentCat, currentAlgo] = fromPath(window.location.hash.slice(1));
 
   // load algorithms
   $.each(categories, (_, cat) => {
@@ -22,10 +19,12 @@ $(() => {
   });
 
   $categories.change(({ target: { value }}) => {
-    const [cat, algo] = value.split('-');
-    loadAlgorithm(cat, algo);
-    currentCat = cat;
-    currentAlgo = algo;
+    const [cat, algo] = fromSelectVal(value);
+    loadAlgorithm(cat, algo)
+      .then(() => {
+        currentCat = cat;
+        currentAlgo = algo;
+      });
   });
 
   $run.click(() => {
@@ -40,7 +39,9 @@ $(() => {
 
   $random.click(loadRandomArrayData);
 
-  $categories.val(`${currentCat}-${currentAlgo}`);
-  loadAlgorithm(currentCat, currentAlgo);
+  loadAlgorithm(currentCat, currentAlgo)
+    .then(() => {
+      $categories.val(toSelectVal(currentCat, currentAlgo));
+    });
   loadRandomArrayData();
 });

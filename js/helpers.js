@@ -5,6 +5,21 @@ const randomInt = () => Math.floor(1 + Math.random() * 9);
 const randomInRange = (min, max) => Math.floor(min + Math.random() * max);
 const randomArray = () => [...new Array(randomInRange(5, 15))].map(randomInt);
 
+const defaultCat = 'sorting';
+const defaultAlgo = 'bubble';
+
+const toSelectVal = (cat, algo) => `${cat}-${algo}`;
+const fromSelectVal = (value) => value.split('-');
+
+const toPath = (cat, algo) => `/${cat}/${algo}`;
+const fromPath = (path) => {
+  const [
+    currentCat = defaultCat,
+    currentAlgo = defaultAlgo
+  ] = path.split('/').filter(x => !!x);
+  return [currentCat, currentAlgo];
+}
+
 function idToTheme(id) {
   return (id.replace('js-editor-', '') === 'code') ? 'solarized_light' : 'tomorrow_night';
 }
@@ -45,18 +60,31 @@ function createAlgorithmSelectGroup(cat) {
 
 function createAlgorithmSelectOption(cat, algo) {
   return `
-    <option value="${cat}-${algo}" class="algorithm">
+    <option value="${toSelectVal(cat, algo)}" class="algorithm">
       ${capitalize(algo)} Sort
     </option>
   `;
 }
 
 function loadAlgorithm(cat, algo) {
-  const path = `/${cat}/${algo}`;
-  $.get(`.${path}.js`, (res) => {
-    window.codeEditor.editor.setValue(res);
-    window.location.hash = path;
-  });
+  const path = toPath(cat, algo);
+  return fetch(`.${path}.js`)
+    .then((res) => {
+      if(res.ok) {
+        return res.text();
+      } else {
+        console.error('Network Problem.');
+      }
+    })
+    .then((res) => {
+      window.codeEditor.editor.setValue(res);
+      window.location.hash = path;
+    })
+    .catch(() => {
+      if (cat !== defaultCat || algo !== defaultAlgo) {
+        return loadAlgorithm(defaultCat, defaultAlgo);
+      }
+    });
 }
 
 function loadData(data) {
