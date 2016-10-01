@@ -1,0 +1,36 @@
+<!doctype>
+<html>
+  <head>
+    <title>CSJS</title>
+    <link rel="stylesheet" href="./css/style.css">
+  </head>
+  <body>
+    <div class="app">
+      <h1>
+        CS JS
+      </h1>
+
+      <div class="content">
+        <div class="categories">
+          <select id="js-categories"></select>
+        </div>
+        <div class="algorithm">
+          <div id="js-output" class="output"><pre></pre></div>
+          <div id="js-editor-code" class="editor"></div>
+          <div id="js-editor-data" class="editor"></div>
+          <button type="button" class="editor-btn" id="js-run">Run</button>
+          <button type="button" class="editor-btn" id="js-random">Random</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-2.2.4.min.js"
+            integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+            crossorigin="anonymous">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.2.5/ace.js"></script>
+    <script src="./js/data.js"></script>
+    <script src="./js/helpers.js"></script>
+    <script src="./js/initialize.js"></script>
+  </body>
+</html>
