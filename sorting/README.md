@@ -1,5 +1,7 @@
 # Computer Science in JavaScript
 
+  Demonstration of basic CS Algorithms in JavaScript
+
 ## Generic Optimization Hints
 
   - Optimizing sorting algorithms

@@ -60,7 +60,9 @@ function loadAlgorithm(cat, algo) {
 }
 
 function loadData(data) {
-  window.dataEditor.editor.setValue(`[${data}];`);
+  window.dataEditor.editor.setValue(`
+const arr = [${data}];
+  `);
 }
 
 function loadRandomArrayData() {
@@ -72,9 +74,9 @@ function getCodeString(algo) {
   const data = window.dataEditor.editor.getValue();
 
   return `
-    const data=${data}
+    ${data}
     ${code}
-    ${algo}(data);
+    ${algo}(arr);
   `;
 }
 

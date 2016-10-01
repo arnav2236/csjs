@@ -40,6 +40,7 @@ $(() => {
 
   $random.click(loadRandomArrayData);
 
+  $categories.val(`${currentCat}-${currentAlgo}`);
   loadAlgorithm(currentCat, currentAlgo);
   loadRandomArrayData();
 });
