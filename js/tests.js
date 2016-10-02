@@ -1,7 +1,8 @@
+
+// async script loading and testing (not smart lol)
 function tests() {
 
   const head = document.getElementsByTagName('head')[0];
-
 
   const testCount = 1;
   const isSorted = (arr) => {
