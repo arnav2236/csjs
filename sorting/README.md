@@ -2,6 +2,11 @@
 
   Demonstration of basic CS Algorithms in JavaScript
 
+## Algorithm Implementation Hints
+
+  - BubbleSort (`do/while`, no need to go past last swapped elem)
+  - InsertionSort
+
 ## Generic Optimization Hints
 
   - Optimizing sorting algorithms

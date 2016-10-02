@@ -1,7 +1,10 @@
 const capitalize = (x) => x.charAt(0).toUpperCase() + x.slice(1);
 const typeToId = (type) => `js-editor-${type}`;
 const grabById = (id) => $(`#${id}`);
-const randomInt = () => Math.floor(1 + Math.random() * 9);
+const randomInt = () => Math.floor(
+  1 + Math.random() * 9 *
+  (Math.random() > 0.5 ? -1 : 1)
+);
 const randomInRange = (min, max) => Math.floor(min + Math.random() * max);
 const randomArray = () => [...new Array(randomInRange(5, 15))].map(randomInt);
 
@@ -20,9 +23,18 @@ const fromPath = (path) => {
   return [currentCat, currentAlgo];
 }
 
-function idToTheme(id) {
-  return (id.replace('js-editor-', '') === 'code') ? 'solarized_light' : 'tomorrow_night';
-}
+const prettyAlgoName = (algo) => algo
+  .replace('_', ' ')
+  .split(' ')
+  .map(capitalize)
+  .join(' ')
+  .replace(/(\d+)/g, ' $1');
+
+const idToTheme = (id) => (
+  id.replace('js-editor-', '') === 'code' ?
+  'solarized_light' :
+  'tomorrow_night'
+);
 
 function idToEditor(id) {
   const editor = ace.edit(id);
@@ -61,23 +73,28 @@ function createAlgorithmSelectGroup(cat) {
 function createAlgorithmSelectOption(cat, algo) {
   return `
     <option value="${toSelectVal(cat, algo)}" class="algorithm">
-      ${capitalize(algo)} Sort
+      ${prettyAlgoName(algo)}
     </option>
   `;
 }
 
-function loadAlgorithm(cat, algo) {
-  const path = toPath(cat, algo);
+function getAlgorithm(path) {
   return fetch(`.${path}.js`)
     .then((res) => {
       if(res.ok) {
         return res.text();
       } else {
-        console.error('Network Problem.');
+        throw 'Network Problem';
       }
-    })
-    .then((res) => {
-      window.codeEditor.editor.setValue(res);
+    });
+}
+
+function loadAlgorithm(cat, algo) {
+  const path = toPath(cat, algo);
+  return getAlgorithm(path)
+    .then((code) => {
+      debugger;
+      window.codeEditor.editor.setValue(code);
       window.location.hash = path;
     })
     .catch(() => {
@@ -109,5 +126,5 @@ function getCodeString(algo) {
 }
 
 function toDOMArray(arrString) {
-  return `[${arrString.toString().replace(/(\d)/g, `<span class="digit">&nbsp;$1</span>`)}]`;
+  return `[${arrString.toString().replace(/(\d+)/g, `<span class="digit">&nbsp;$1</span>`)}]`;
 }

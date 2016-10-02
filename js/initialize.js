@@ -7,7 +7,7 @@ $(() => {
   const $random = $('#js-random');
   const $output = $('#js-output pre');
 
-  const [currentCat, currentAlgo] = fromPath(window.location.hash.slice(1));
+  let [currentCat, currentAlgo] = fromPath(window.location.hash.slice(1));
 
   // load algorithms
   $.each(categories, (_, cat) => {
@@ -31,7 +31,8 @@ $(() => {
     const codeString = getCodeString(currentAlgo);
     try {
       const result = eval(codeString);
-      $output.removeClass('error').html(toDOMArray(result));
+      const domResult = toDOMArray(result);
+      $output.removeClass('error').html(domResult);
     } catch ({ message }) {
       $output.addClass('error').html(message);
     }
