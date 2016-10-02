@@ -15,7 +15,6 @@ function tests() {
   const testAlgorithm = (algo) => {
     return [...new Array(testCount)].every(() => {
       const algoCode = window[algo];
-      debugger;
       const data = randomArray();
       const result = algoCode(data);
       return isSorted(result);

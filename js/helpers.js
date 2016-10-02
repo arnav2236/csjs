@@ -93,7 +93,6 @@ function loadAlgorithm(cat, algo) {
   const path = toPath(cat, algo);
   return getAlgorithm(path)
     .then((code) => {
-      debugger;
       window.codeEditor.editor.setValue(code);
       window.location.hash = path;
     })
