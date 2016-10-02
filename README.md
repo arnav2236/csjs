@@ -4,9 +4,11 @@ Small collection of basic CS Algorithms/Data Structures in JavaScript.
 
 [Live Demos](https://nem035.github.io/csjs/)
 
-This project started out by me wanting to play around with CSS variables but then I just went bananas and wrote some algorithms (and some other [crazy stuff](https://github.com/nem035/csjs/blob/gh-pages/js/tests.js)).
+This project started out by me wanting to play around with CSS variables but then I just went bananas and wrote some algorithms (and some other [silly stuff](https://github.com/nem035/csjs/blob/gh-pages/js/tests.js)).
 
-If you're interested in these topics, [definitely checkout the much better version of this project.](https://github.com/nzakas/computer-science-in-javascript/)
+If you're interested in these topics, [definitely checkout the much better version of this project.](https://github.com/nzakas/computer-science-in-javascript/).
+
+Definitely checkout the awesome [Algorithm Visualizer](algo-visualizer.jasonpark.me) as well.
 
 ## Algorithm Implementation/Optimization Hints
 
