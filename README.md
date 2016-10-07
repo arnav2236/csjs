@@ -14,6 +14,7 @@ Equally recomended is the awesome [Algorithm Visualizer](algo-visualizer.jasonpa
 
 - BubbleSort (`do/while`, no need to go past the last swapped element)
 - InsertionSort (we can stop searching as soon as we find insertion point)
+- MergeSort (we can merge left and right subarrays in-place)
 
 ## Generic Optimization Hints
 
