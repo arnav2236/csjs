@@ -2,7 +2,7 @@
   Time: O(N^2)
   Space: O(1)
 */
-function insertion4(arr) {
+function insertion_sort4(arr) {
 
   // create variables to track insertion position and
   // the element being inserted

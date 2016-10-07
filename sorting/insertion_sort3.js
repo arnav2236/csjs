@@ -2,7 +2,7 @@
   Time: O(N^2)
   Space: O(1)
 */
-function insertion3(arr) {
+function insertion_sort3(arr) {
   // extract array length
   const { length: len } = arr;
 

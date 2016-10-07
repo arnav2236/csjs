@@ -2,7 +2,7 @@
   After the last time we make a swap,
   all subsequent elements must be sorted.
 */
-function bubble_optimized2(arr) {
+function bubble_sort1_optimized2(arr) {
   // create the swapped flag
   let swapped;
 

@@ -4,10 +4,10 @@ function tests() {
 
   const head = document.getElementsByTagName('head')[0];
 
-  const testCount = 1;
+  const testCount = 10;
   const isSorted = (arr) => {
     for (let i = 1; i < arr.length; i++) {
-      if (arr[i] < arr[i - 1]) return false;
+      if (arr[i - 1] > arr[i]) return false;
     }
     return true;
   };
@@ -15,9 +15,13 @@ function tests() {
   const testAlgorithm = (algo) => {
     return [...new Array(testCount)].every(() => {
       const algoCode = window[algo];
+      if (typeof algoCode !== 'function') throw `Missing method ${algo}`;
       const data = randomArray();
       const result = algoCode(data);
-      return isSorted(result);
+      if (!isSorted(result)) {
+        throw `Not Sorted <${algo}>: ${result}`;
+      }
+      return true;
     });
   }
 
@@ -54,6 +58,7 @@ function tests() {
 
   // shoutout e-satis: http://stackoverflow.com/a/950146/3928341
   function loadScript(url, callback) {
+
     // Adding the script tag to the head as suggested before
     const script = document.createElement('script');
     script.type = 'text/javascript';

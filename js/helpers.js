@@ -9,7 +9,7 @@ const randomInRange = (min, max) => Math.floor(min + Math.random() * max);
 const randomArray = () => [...new Array(randomInRange(5, 15))].map(randomInt);
 
 const defaultCat = 'sorting';
-const defaultAlgo = 'bubble';
+const defaultAlgo = 'bubble_sort1';
 
 const toSelectVal = (cat, algo) => `${cat}-${algo}`;
 const fromSelectVal = (value) => value.split('-');
@@ -24,7 +24,7 @@ const fromPath = (path) => {
 }
 
 const prettyAlgoName = (algo) => algo
-  .replace('_', ' ')
+  .replace(/_/g, ' ')
   .split(' ')
   .map(capitalize)
   .join(' ')
@@ -51,6 +51,21 @@ const setGlobalEditor = (type, editor, $editor) => {
     $editor
   };
 };
+
+const getGlobalEditor = (type) => window[`${type}Editor`];
+
+const getEditorValue = (type) => (
+  getGlobalEditor(type)
+  .editor
+  .getValue()
+);
+
+const setEditorValue = (type, value) => (
+  getGlobalEditor(type)
+  .editor
+  .setValue(value)
+);
+
 
 function setupEditors() {
   const ids = ['code', 'data'].map(typeToId);
@@ -93,7 +108,7 @@ function loadAlgorithm(cat, algo) {
   const path = toPath(cat, algo);
   return getAlgorithm(path)
     .then((code) => {
-      window.codeEditor.editor.setValue(code);
+      setEditorValue('code', code);
       window.location.hash = path;
     })
     .catch(() => {
@@ -104,7 +119,7 @@ function loadAlgorithm(cat, algo) {
 }
 
 function loadData(data) {
-  window.dataEditor.editor.setValue(`
+  setEditorValue('data', `
 const arr = [${data}];
   `);
 }
@@ -114,8 +129,8 @@ function loadRandomArrayData() {
 }
 
 function getCodeString(algo) {
-  const code = window.codeEditor.editor.getValue();
-  const data = window.dataEditor.editor.getValue();
+  const code = getEditorValue('code');
+  const data = getEditorValue('data');
 
   return `
     ${data}
@@ -125,5 +140,5 @@ function getCodeString(algo) {
 }
 
 function toDOMArray(arrString) {
-  return `[${arrString.toString().replace(/(\d+)/g, `<span class="digit">&nbsp;$1</span>`)}]`;
+  return `[${arrString.toString().replace(/(-?\d+)/g, `<span class="digit">&nbsp;$1</span>`)}]`;
 }

@@ -1,10 +1,9 @@
 /*
-  After a loop iteration, the last
-  element must be sorted.
+  Time: O(N^2)
+  Space: O(1)
 */
-function bubble_optimized1(arr) {
-  // extract array length and create the swapped flag
-  let { length: len } = arr;
+function bubble_sort1(arr) {
+  // create the swapped flag
   let swapped;
 
   // loop while we can swap: O(N)
@@ -12,8 +11,8 @@ function bubble_optimized1(arr) {
     // reset swapped flag on each iteration
     swapped = false;
 
-    // loop through the unsorted portion of the array: O(N)
-    for (let i = 0; i < len; i++) {
+    // loop through the entire array: O(N)
+    for (let i = 0; i < arr.length; i++) {
 
       // swap each pair of elements if current is greater then the next
       if (arr[i] > arr[i + 1]) {
@@ -24,9 +23,6 @@ function bubble_optimized1(arr) {
         swapped = true;
       }
     }
-
-    // reduce the next loop size since we sorted the last element
-    len--;
   } while (swapped);
 
   // we are done swapping, array is sorted

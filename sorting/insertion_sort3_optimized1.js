@@ -5,7 +5,7 @@
   Stop searching through the sorted portion as
   soon as we find the insertion position
 */
-function insertion3_optimized1(arr) {
+function insertion_sort3_optimized1(arr) {
   // extract array length
   const { length: len } = arr;
 
