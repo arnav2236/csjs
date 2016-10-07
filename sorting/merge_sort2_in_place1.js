@@ -13,7 +13,7 @@ function merge_sort2_in_place1(arr, start = 0, end = arr.length - 1) {
     merge_sort2_in_place1(arr, mid + 1, end);
 
     // merge array halves
-    merge2(arr, start, mid, mid + 1, end);
+    merge_in_place(arr, start, mid, mid + 1, end);
   }
   return arr;
 }

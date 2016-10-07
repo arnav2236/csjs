@@ -4,7 +4,6 @@ function tests() {
 
   const head = document.getElementsByTagName('head')[0];
 
-  const testCount = 10;
   const isSorted = (arr) => {
     for (let i = 1; i < arr.length; i++) {
       if (arr[i - 1] > arr[i]) return false;
@@ -12,11 +11,13 @@ function tests() {
     return true;
   };
 
+  const testCount = 10;
   const testAlgorithm = (algo) => {
     console.log(`Testing ${algo}`);
-    return [...new Array(testCount)].every(() => {
-      const algoCode = window[algo];
-      if (typeof algoCode !== 'function') throw `Missing method ${algo}`;
+    const algoCode = window[algo];
+    if (typeof algoCode !== 'function') throw `Missing method ${algo}`;
+
+    const result = [...new Array(testCount)].every(() => {
       const data = randomArray();
       const result = algoCode(data);
       if (!isSorted(result)) {
@@ -25,28 +26,23 @@ function tests() {
       }
       return true;
     });
+
+    window[algo] = undefined; // reset
+    return result;
   }
 
   const testCategory = (cat) => algorithms[cat].every(testAlgorithm);
 
   const testCategoryPromise = (cat) => new Promise(
     (resolve, reject) => {
-      console.info(`Testing ${cat}`);
+      console.info(`Testing ${cat}
+----------------------------`);
       if (testCategory(cat)) {
-        resolve();
+        resolve('Passed');
       } else {
-        reject();
+        reject('Failed');
       }
     });
-
-  const displayTestResults = () => {
-    const allPassed = categories.every(testCategory);
-    if (!allPassed) {
-      console.error('Test(s) Failed');
-    } else {
-      console.info('Tests Passed');
-    }
-  };
 
   const loadAlgoScripts = (cat) =>
     algorithms[cat]
@@ -62,7 +58,7 @@ function tests() {
     categories.forEach((cat) => {
       loadAlgoScripts(cat)
         .then(() => testCategoryPromise(cat))
-        .then(displayTestResults)
+        .then(console.info)
         .catch(console.error);
     });
   };
