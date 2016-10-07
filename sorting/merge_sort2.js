@@ -28,19 +28,21 @@ function merge2(arr, startLeft, endLeft, startRight, endRight) {
   const left = arr.slice(startLeft, endLeft + 1);
   const right = arr.slice(startRight, endRight + 1);
 
-  // while both arrays have elements, keep extracting the smaller one
+  // while both arrays have elements
+  // keep extracting the smaller one
   while (left.length && right.length) {
     if (left[0] < right[0]) {
-      sorted.push(left.slice());
+      sorted.push(left.shift());
     } else {
-      sorted.push(right.slice());
+      sorted.push(right.shift());
     }
   }
 
   // if either array (only one may) still has elements,
   // add them to the end of the sorted array
-  sorted.push(left, right);
+  sorted.push(...left, ...right);
 
-  // return sorted array
-  return sorted;
+  // add the combination of sorted left and right arrays
+  // back into the original array
+  arr.splice(startLeft, sorted.length, ...sorted);
 }
