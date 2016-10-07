@@ -9,8 +9,8 @@ function merge_sort2_in_place1(arr, start = 0, end = arr.length - 1) {
   if (start < end) {
     // split and sort the array recursively
     const mid = Math.floor((start + end) / 2);
-    merge_sort2(arr, start, mid);
-    merge_sort2(arr, mid + 1, end);
+    merge_sort2_in_place1(arr, start, mid);
+    merge_sort2_in_place1(arr, mid + 1, end);
 
     // merge array halves
     merge2(arr, start, mid, mid + 1, end);
