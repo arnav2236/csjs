@@ -19,6 +19,7 @@ $(() => {
   });
 
   $categories.change(({ target: { value }}) => {
+    $output.empty();
     const [cat, algo] = fromSelectVal(value);
     loadAlgorithm(cat, algo)
       .then(() => {
@@ -28,21 +29,22 @@ $(() => {
   });
 
   $run.click(() => {
-    const codeString = getCodeString(currentAlgo);
+    const codeString = getCodeString(currentCat, currentAlgo);
     try {
       const result = eval(codeString);
-      const domResult = toDOMArray(result);
+      const domResult = toDOMResult(result);
       $output.removeClass('error').html(domResult);
     } catch ({ message }) {
       $output.addClass('error').html(message);
     }
   });
 
-  $random.click(loadRandomArrayData);
+  $random.click(() => {
+    loadData(currentCat, currentAlgo);
+  });
 
   loadAlgorithm(currentCat, currentAlgo)
     .then(() => {
       $categories.val(toSelectVal(currentCat, currentAlgo));
     });
-  loadRandomArrayData();
 });

@@ -7,6 +7,9 @@ const randomInt = () => Math.floor(
 );
 const randomInRange = (min, max) => Math.floor(min + Math.random() * max);
 const randomArray = () => [...new Array(randomInRange(5, 15))].map(randomInt);
+const randomSortedArray = () => randomArray().sort(
+  (a, b) => a > b ? 1 : a < b ? -1 : 0
+);
 
 const defaultCat = 'sorting';
 const defaultAlgo = 'bubble_sort1';
@@ -66,7 +69,6 @@ const setEditorValue = (type, value) => (
   .setValue(value)
 );
 
-
 function setupEditors() {
   const ids = ['code', 'data'].map(typeToId);
   const [ codeEditor, dataEditor ] = ids.map(idToEditor);
@@ -110,6 +112,7 @@ function loadAlgorithm(cat, algo) {
     .then((code) => {
       setEditorValue('code', code);
       window.location.hash = path;
+      loadData(cat, algo);
     })
     .catch(() => {
       if (cat !== defaultCat || algo !== defaultAlgo) {
@@ -118,27 +121,48 @@ function loadAlgorithm(cat, algo) {
     });
 }
 
-function loadData(data) {
+function loadRandomArray() {
   setEditorValue('data', `
-const arr = [${data}];
+const arr = [${randomArray()}];
   `);
 }
 
-function loadRandomArrayData() {
-  loadData(randomArray());
+function loadTwoSortedArrays() {
+  setEditorValue('data', `
+const sorted1 = [${randomSortedArray()}];
+const sorted2 = [${randomSortedArray()}];
+  `);
 }
 
-function getCodeString(algo) {
+function loadData(cat, algo) {
+  switch (cat) {
+    case 'sorting': return loadRandomArray();
+    case 'median': return loadTwoSortedArrays();
+    default: throw `Invalid Category ${cat}`;
+  }
+}
+
+function getArgsForCat(cat) {
+  switch (cat) {
+    case 'sorting': return `arr`;
+    case 'median': return `sorted1, sorted2`;
+    default: throw `Invalid Category ${cat}`;
+  }
+}
+
+function getCodeString(cat, algo) {
   const code = getEditorValue('code');
   const data = getEditorValue('data');
+
+  const args = getArgsForCat(cat);
 
   return `
     ${data}
     ${code}
-    ${algo}(arr);
+    ${algo}(${args});
   `;
 }
 
-function toDOMArray(arrString) {
-  return `[${arrString.toString().replace(/(-?\d+)/g, `<span class="digit">&nbsp;$1</span>`)}]`;
+function toDOMResult(arrString) {
+  return `${arrString.toString().replace(/(-?\d+)/g, `<span class="digit">&nbsp;$1</span>`)}`;
 }

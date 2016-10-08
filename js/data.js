@@ -1,4 +1,3 @@
-const categories = ['sorting'];
 const algorithms = {
   sorting: [
 
@@ -18,5 +17,12 @@ const algorithms = {
     'merge_sort1',
     'merge_sort2',
     'merge_sort2_in_place1'
+  ],
+
+  median: [
+    'median_of_two_sorted_arrays1',
+    'median_of_two_sorted_arrays1_optimized1'
   ]
 };
+
+const categories = Object.keys(algorithms);
