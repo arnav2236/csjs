@@ -1,5 +1,5 @@
 /*
-  Time: O(N^2)
+  Time: O(N^2) - for every element, we loop the entire array
   Space: O(1)
 */
 function insertion_sort1(arr) {

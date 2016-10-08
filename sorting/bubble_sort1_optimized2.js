@@ -1,4 +1,7 @@
 /*
+  Time:  O(N^2) - for every element, we loop the entire array (better factors)
+  Space: O(1)
+
   After the last time we make a swap,
   all subsequent elements must be sorted.
 */
@@ -16,6 +19,7 @@ function bubble_sort1_optimized2(arr) {
     swapped = false;
     currentSwapIdx = -1;
 
+    // OPTIMIZATION:
     // loop through the unsorted portion of the array: O(N)
     for (let i = 0; i < lastSwapIdx; i++) {
 

@@ -1,6 +1,7 @@
 /*
-  Time: O(NlogN)
-  Space: O(N)
+  Time:  O(NlogN) - N splits into 2
+  Space: O(N)     - because we are creating new arrays
+                    (there's also a logN recursion factor)
 */
 function merge_sort2(arr, start = 0, end = arr.length - 1) {
   if (start < end) {

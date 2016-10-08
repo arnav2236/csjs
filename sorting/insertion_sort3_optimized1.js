@@ -1,5 +1,5 @@
 /*
-  Time: O(N^2)
+  Time: O(N^2) - for every element, we loop the entire array
   Space: O(1)
 
   Stop searching through the sorted portion as
@@ -26,6 +26,7 @@ function insertion_sort3_optimized1(arr) {
         // and shift the remaining elements
         arr.splice(j, 0, curr);
 
+        // OPTIMIZATION:
         // break as soon as we inserted the sorted element
         break;
       }

@@ -1,5 +1,5 @@
 /*
-  Time: O(NlogN)
+  Time:  O(NlogN) - N splits into 2
   Space: O(logN) - for recursion
 
   Alter the merge function to merge the two arrays directly

@@ -1,6 +1,9 @@
 /*
-  After a loop iteration, the last
-  element must be sorted.
+Time:  O(N^2) - for every element, we loop the entire array (better factors)
+  Space: O(1)
+
+  After a loop iteration, the current last
+  element must be sorted so we can stop at that point
 */
 function bubble_sort1_optimized1(arr) {
   // extract array length and create the swapped flag
@@ -25,6 +28,7 @@ function bubble_sort1_optimized1(arr) {
       }
     }
 
+    // OPTIMIZATION:
     // reduce the next loop size since we sorted the last element
     len--;
   } while (swapped);
