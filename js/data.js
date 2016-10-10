@@ -16,7 +16,11 @@ const algorithms = {
     // merge
     "merge_sort1",
     "merge_sort2",
-    "merge_sort2_in_place1"
+    "merge_sort2_in_place1",
+
+    // quick
+    "quick_sort1",
+    "quick_sort2"
   ],
 
   "median": [
