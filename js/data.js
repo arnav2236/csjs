@@ -20,7 +20,8 @@ const algorithms = {
 
     // quick
     "quick_sort1",
-    "quick_sort2"
+    "quick_sort2",
+    "quick_sort2_optimized1"
   ],
 
   "median": [
