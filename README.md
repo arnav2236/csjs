@@ -8,7 +8,7 @@ This project started out by me wanting to play around with [CSS variables](https
 
 If you're interested in these topics, definitely checkout the [much better version](https://github.com/nzakas/computer-science-in-javascript/) of this project.
 
-Equally recomended is the awesome [Algorithm Visualizer](algo-visualizer.jasonpark.me).
+Equally recommended is the awesome [Algorithm Visualizer](algo-visualizer.jasonpark.me).
 
 ## Algorithm Implementation/Optimization Hints
 
